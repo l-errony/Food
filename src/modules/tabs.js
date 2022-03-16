@@ -1,8 +1,9 @@
-window.addEventListener('DOMContentLoaded', () => {
 
-const tabs = document.querySelectorAll('.tabheader__item'),
-    tabsContent = document.querySelectorAll('.tabcontent'),
-    tabsParent = document.querySelector('.tabheader__items');
+    function tabs(tabsSelector, tabsContentSelector, tabsParentSelector, activeClass){
+        
+    const tabs = document.querySelectorAll(tabsSelector),
+    tabsContent = document.querySelectorAll(tabsContentSelector),
+    tabsParent = document.querySelector(tabsParentSelector);
 
     function hideTabContent(){
         tabsContent.forEach(item =>{
@@ -12,7 +13,7 @@ const tabs = document.querySelectorAll('.tabheader__item'),
         });
 
         tabs.forEach(item =>{
-            item.classList.remove('tabheader__item_active');
+            item.classList.remove(activeClass);
         });
     }
 
@@ -21,12 +22,8 @@ const tabs = document.querySelectorAll('.tabheader__item'),
         tabsContent[i].classList.remove('hide');
         tabsContent[i].classList.add('show', 'fade');
         
-        tabs[i].classList.add('tabheader__item_active');
+        tabs[i].classList.add(activeClass);
     }
-
-
-
-
 
 
     hideTabContent();
@@ -36,7 +33,7 @@ const tabs = document.querySelectorAll('.tabheader__item'),
      tabsParent.addEventListener('click', (event) =>{
         const target = event.target;
 
-        if(target && target.classList.contains('tabheader__item')){
+        if(target && target.classList.contains(tabsSelector.slice(1))){
             tabs.forEach((item, i) =>{
                 if(target == item){
                     hideTabContent();
@@ -45,4 +42,6 @@ const tabs = document.querySelectorAll('.tabheader__item'),
             });
         }
     });
-}); 
+}
+
+export default tabs;
